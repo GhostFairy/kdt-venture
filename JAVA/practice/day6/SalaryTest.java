@@ -8,6 +8,7 @@ class Employee {
 	int total;
 
 	public Employee(int id, String name, int salary, int bonus) {
+		// super();
 		this.id = id;
 		this.name = name;
 		this.salary = salary;
@@ -31,7 +32,8 @@ class Manager extends Employee {
 
 	@Override
 	public void calcTotal() {
-		total = salary + bonus + managerBonus;
+		super.calcTotal();
+		total = super.total + managerBonus;
 	}
 
 }
@@ -49,7 +51,8 @@ class Engineer extends Employee {
 
 	@Override
 	public void calcTotal() {
-		total = salary + bonus + certBonus + techBonus;
+		super.calcTotal();
+		total = super.total + certBonus + techBonus;
 	}
 
 }
@@ -65,7 +68,8 @@ class Secretary extends Employee {
 
 	@Override
 	public void calcTotal() {
-		total = salary + bonus + secretBonus;
+		super.calcTotal();
+		total = super.total + secretBonus;
 	}
 
 }
