@@ -1,3 +1,4 @@
+
 class CellPhone {
 
 	String model;
@@ -38,7 +39,7 @@ class CellPhone {
 	}
 
 	boolean isSame(CellPhone other) {
-		if (this.model.equalsIgnoreCase(other.model)) {
+		if (model.equalsIgnoreCase(other.model)) {
 			return true;
 		}
 		return false;
@@ -58,33 +59,17 @@ public class CellPhoneMain {
 
 		try {
 			myPhone.charge(20); // 20분간 충전을 한다.
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		}
-		myPhone.printBattery();
+			myPhone.printBattery();
 
-		try {
 			myPhone.call(300); // 300분간 통화를 한다.
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		}
-		myPhone.printBattery();
+			myPhone.printBattery();
 
-		try {
 			myPhone.charge(50); // 50분간 충전을 한다.
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		}
-		myPhone.printBattery();
+			myPhone.printBattery();
 
-		try {
 			myPhone.call(40); // 40분간 통화를 한다.
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		}
-		myPhone.printBattery();
+			myPhone.printBattery();
 
-		try {
 			myPhone.call(-20); // 통화시간입력오류
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
