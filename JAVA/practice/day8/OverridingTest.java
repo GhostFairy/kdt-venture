@@ -20,6 +20,9 @@ class MySum {
 	public boolean equals(Object obj) {
 		if (obj instanceof MySum) {
 			if (toString().equals(obj.toString())) {
+				// 전달받은 class는 Object로 형변환되었으므로 obj.toString()은 Object의 toString()이지만
+				// 상속받은 메소드를 Overriding한 경우 변경된 메소드를 호출하므로
+				// obj가 MySum의 인스턴스일 때는 MySum의 toString()을 사용함
 				return true;
 			} else {
 				return false;
@@ -45,6 +48,12 @@ public class OverridingTest {
 
 		if (ms1.equals(ms2)) {
 			System.out.println("ms1과 ms2의 합계는 동일합니다.");
+		}
+
+		String s1 = new String("30");
+
+		if (ms1.equals(s1)) {
+			System.out.println("ms1과 s1의 합계는 동일합니다.");
 		}
 	}
 
