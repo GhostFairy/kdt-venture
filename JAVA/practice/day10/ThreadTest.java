@@ -64,23 +64,10 @@ public class ThreadTest {
 		arr[1] = new NewsThread("뉴스 쓰레드");
 		arr[2] = new DownloadThread("다운로드 쓰레드");
 
-		// interface Runnable { void run(); } -> 함수형 인터페이스 -> 람다식
-		Thread t = new Thread(() -> {
-			for (int i = 0; i < 7; i++) {
-				Thread.currentThread().setName("카카오톡 쓰레드");
-				System.out.println("카톡 보내는 중입니다.");
-				try {
-					Thread.sleep((int) (Math.random() * 50));
-				} catch (InterruptedException e) {
-				}
-			}
-		});
-
 		// 3개의 쓰레드를 시작하는 메소드 호출
-		arr[0].start();
-		arr[1].start();
-		arr[2].start();
-		t.start();
+		for (int i = 0; i < arr.length; i++) {
+			arr[i].start();
+		}
 	}
 
 }
