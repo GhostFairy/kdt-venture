@@ -20,15 +20,14 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 class Student {
 
-	String name;
-	int kor;
-	int eng;
-	int mat;
-	int sum;
-	double avg;
+	private String name;
+	private int kor;
+	private int eng;
+	private int mat;
+	private int sum;
+	private double avg;
 
 	public Student(String name, int kor, int eng, int mat) {
 		this.name = name;
@@ -37,6 +36,46 @@ class Student {
 		this.mat = mat;
 		sum = kor + eng + mat;
 		avg = sum / 3.0;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getKor() {
+		return kor;
+	}
+
+	public void setKor(int kor) {
+		this.kor = kor;
+	}
+
+	public int getEng() {
+		return eng;
+	}
+
+	public void setEng(int eng) {
+		this.eng = eng;
+	}
+
+	public int getMat() {
+		return mat;
+	}
+
+	public void setMat(int mat) {
+		this.mat = mat;
+	}
+
+	public int getSum() {
+		return sum;
+	}
+
+	public double getAvg() {
+		return avg;
 	}
 
 	@Override
@@ -59,16 +98,32 @@ public class ScoreTest {
 		ArrayList<Student> list = new ArrayList<Student>();
 
 		for (int i = 0; i < max; i++) {
-			System.out.print("학생 정보 입력 (이름 국어 영어 수학): ");
+			System.out.print("학생 이름: ");
 			String name = sc.next();
+			System.out.print("국어: ");
 			int kor = sc.nextInt();
+			System.out.print("영어: ");
 			int eng = sc.nextInt();
+			System.out.print("수학: ");
 			int mat = sc.nextInt();
+			System.out.println();
 
 			list.add(new Student(name, kor, eng, mat));
 		}
 		System.out.println();
 		sc.close();
+
+		// 추가 문제: 1등 학생 출력해보기
+		Student first = null;
+		double firstAvg = 0;
+		for (Student stu : list) {
+			if (stu.getAvg() > firstAvg) {
+				first = stu;
+				firstAvg = stu.getAvg();
+			}
+		}
+
+		System.out.println("1등\t" + first.toString());
 
 		FileWriter fw = new FileWriter("scores.dat", true);
 		fw.write("순번\t이름\t\t국어\t영어\t수학\t총점\t평균\n");
