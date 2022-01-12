@@ -89,14 +89,12 @@ class Student {
 public class ScoreTest {
 
 	public static void main(String[] args) throws IOException {
-
 		Scanner sc = new Scanner(System.in);
 		System.out.print("입력할 학생의 수: ");
 		int max = sc.nextInt();
 		System.out.println();
 
 		ArrayList<Student> list = new ArrayList<Student>();
-
 		for (int i = 0; i < max; i++) {
 			System.out.print("학생 이름: ");
 			String name = sc.next();
@@ -107,7 +105,6 @@ public class ScoreTest {
 			System.out.print("수학: ");
 			int mat = sc.nextInt();
 			System.out.println();
-
 			list.add(new Student(name, kor, eng, mat));
 		}
 		System.out.println();
@@ -122,12 +119,10 @@ public class ScoreTest {
 				firstAvg = stu.getAvg();
 			}
 		}
-
 		System.out.println("1등\t" + first.toString());
 
 		FileWriter fw = new FileWriter("scores.dat", true);
 		fw.write("순번\t이름\t\t국어\t영어\t수학\t총점\t평균\n");
-
 		for (int i = 0; i < list.size(); i++) {
 			fw.write((i + 1) + "\t" + list.get(i).toString() + "\n");
 		}
