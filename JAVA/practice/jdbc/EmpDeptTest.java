@@ -3,6 +3,7 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,13 +12,13 @@ public class EmpDeptTest {
 
 	public static void main(String[] args) {
 		EmpDeptTest t = new EmpDeptTest();
-		ArrayList<Employee> list = t.selectEmp("06");
+		ArrayList<Employee> list = t.selectEmp(new String[] { "02", "06", "12" });
 		for (Employee e : list) {
 			System.out.println(e);
 		}
 	}
 
-	ArrayList<Employee> selectEmp(String month) {
+	ArrayList<Employee> selectEmp(String[] month) {
 		ArrayList<Employee> list = new ArrayList<Employee>();
 
 		try {
@@ -26,14 +27,20 @@ public class EmpDeptTest {
 			// DB 연결
 			Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/employeesdb", "emp", "emp");
 
-			String query = "SELECT employee_id, first_name, salary, hire_date FROM employees WHERE hire_date LIKE '%-" + month + "-%'";
-			ResultSet rs = conn.createStatement().executeQuery(query);
+			// 같은 SQL 구문을 조건만 바꾸면서 여러 번 실행하는 경우
+			String query = "\"SELECT employee_id, first_name, salary, hire_date FROM employees WHERE hire_date LIKE '%-?-%'";
+			PreparedStatement ps = conn.prepareStatement(query);
 
-			while (rs.next()) {
-				list.add(new Employee(rs.getInt("employee_id"), rs.getString("first_name"), rs.getDouble("salary"), rs.getString("hire_date")));
+			for (int i = 0; i < month.length; i++) {
+				ps.setInt(1, Integer.parseInt(month[i]));
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+					list.add(new Employee(rs.getInt("employee_id"), rs.getString("first_name"), rs.getDouble("salary"), rs.getString("hire_date")));
+				}
+				rs.close();
 			}
 
-			rs.close();
+			ps.close();
 			conn.close();
 
 		} catch (ClassNotFoundException | SQLException e) {
