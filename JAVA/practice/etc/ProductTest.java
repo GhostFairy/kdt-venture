@@ -1,5 +1,3 @@
-package javaProject1;
-
 import java.text.DecimalFormat;
 
 class Product {

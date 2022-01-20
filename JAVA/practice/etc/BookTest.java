@@ -1,5 +1,3 @@
-package javaProject2;
-
 import java.text.DecimalFormat;
 
 class Book {
