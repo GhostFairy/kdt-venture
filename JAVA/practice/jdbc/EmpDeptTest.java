@@ -35,7 +35,12 @@ public class EmpDeptTest {
 				ps.setInt(1, Integer.parseInt(month[i]));
 				ResultSet rs = ps.executeQuery();
 				while (rs.next()) {
-					list.add(new Employee(rs.getInt("employee_id"), rs.getString("first_name"), rs.getDouble("salary"), rs.getString("hire_date")));
+					int employee_id = rs.getInt("employee_id");
+					String first_name = rs.getString("first_name");
+					double salary = rs.getDouble("salary");
+					String hire_date = rs.getString("hire_date");
+					
+					list.add(new Employee(employee_id, first_name, salary, hire_date));
 				}
 				rs.close();
 			}
