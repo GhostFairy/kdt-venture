@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+table {
+	border-collapse: collapse;
+	text-align: center;
+}
+
+th, td {
+	border: 3px solid lime;
+	width: 100px;
+}
+</style>
+</head>
+<body>
+	<script>
+		/* 
+		100 60 80
+		100점 60점 80점
+		-100 -80 -60 -> 양수 입력까지 반복
+		점수100 -> 처리X
+		
+		1. prompt 3개 작성(0-100)
+		국어 : xxx
+		수학 : xxx
+		영어 : xxx
+		
+		2. confirm 1개 작성
+		위의 점수를 공개하시겠습니까? 확인 / 취소
+		
+		3. 점수 계산
+		총점 / 정수평균 / 등급 출력
+		
+		총점 
+		국어 + 수학 + 영어 
+		(단 위의 점수를 공개하시겠습니까? 확인버튼 클릭시 각 과목당 10점 가산-최고점 100점 )
+		(단 위의 점수를 공개하시겠습니까? 취소버튼 클릭시 각 과목당 가산점 없음 )
+		
+		정수평균 10 / 3--> 3.333
+		80점 이상 "우수"
+		60점 이상 "보통"
+		40점 이상 "노력"
+		그외에 "많이 분발"
+		
+		테이블태그
+		국어
+		수학
+		영어
+		총점
+		평균
+		등급
+		 */
+
+		var kor, mat, eng;
+		do {
+			kor = parseInt(prompt("국어 점수를 입력하세요."));
+		} while ((kor < 0) || (kor > 100));
+		do {
+			mat = parseInt(prompt("영어 점수를 입력하세요."));
+		} while ((mat < 0) || (mat > 100));
+		do {
+			eng = parseInt(prompt("수학 점수를 입력하세요."));
+		} while ((eng < 0) || (eng > 100));
+		var open = confirm("입력한 점수를 공개하시겠습니까?");
+		if (open) {
+			kor = kor <= 90 ? kor + 10 : 100;
+			mat = mat <= 90 ? mat + 10 : 100;
+			eng = eng <= 90 ? eng + 10 : 100;
+		}
+		var tot = kor + mat + eng;
+		var avg = Math.round(tot / 3);
+		var grade = "많이 분발";
+		if (avg >= 80) {
+			grade = "우수";
+		} else if (avg >= 60) {
+			grade = "보통";
+		} else if (avg >= 40) {
+			grade = "노력";
+		}
+
+		var table = `<table>
+			<tr><th>국어</th><td>${kor}</td></tr>
+			<tr><th>수학</th><td>${mat}</td></tr>
+			<tr><th>영어</th><td>${eng}</td></tr>
+			<tr><th>총점</th><td>${tot}</td></tr>
+			<tr><th>평균</th><td>${avg}</td></tr>
+			<tr><th>등급</th><td>${grade}</td></tr>
+			<tr><th>공개</th><td>${open}</td></tr>
+			</table>`;
+		
+		document.write(table);
+	</script>
+</body>
+</html>
