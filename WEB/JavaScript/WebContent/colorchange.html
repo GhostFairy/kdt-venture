@@ -16,31 +16,43 @@
 	선 / 바탕색 - 캔버스 내부 왼쪽 오른쪽 배치 -->
 	<script>
 		var ctx = document.getElementById("mycanvas").getContext("2d");
-
-		function drawRect(ctx, color) {
-			ctx.clearRect(0, 0, 640, 400);
-			ctx.strokeStyle = color;
-			ctx.strokeRect(80, 150, 200, 100);
-			ctx.fillStyle = color;
-			ctx.fillRect(360, 150, 200, 100);
-		}
+		var radio = document.getElementsByName("col");
 
 		window.onload = function() {
-			var one = document.getElementById("one");
-			one.onclick = function() {
-				drawRect(ctx, one.value);
+			/*
+			// 전역변수 i의 값을 scope가 Closure 내부로 한정된 지역변수 index에 새로 담기
+			for (i in radio) {
+				(function(index) {
+					radio[i].onclick = function() {
+						ctx.clearRect(0, 0, 640, 400);
+						ctx.strokeStyle = radio[index].value;
+						ctx.strokeRect(80, 150, 200, 100);
+						ctx.fillStyle = radio[index].value;
+						ctx.fillRect(360, 150, 200, 100);
+					}
+				})(i);
+			}			for (i in radio) {
+				radio[i].onclick = (function(index) {
+					return function() {
+						ctx.clearRect(0, 0, 640, 400);
+						ctx.strokeStyle = radio[index].value;
+						ctx.strokeRect(80, 150, 200, 100);
+						ctx.fillStyle = radio[index].value;
+						ctx.fillRect(360, 150, 200, 100);
+					}
+				})(i);
 			}
-			var two = document.getElementById("two");
-			two.onclick = function() {
-				drawRect(ctx, two.value);
-			}
-			var three = document.getElementById("three");
-			three.onclick = function() {
-				drawRect(ctx, three.value);
-			}
-			var four = document.getElementById("four");
-			four.onclick = function() {
-				drawRect(ctx, four.value);
+			 */
+
+			// i를 let으로 선언하여 scope를 블록 내부로 한정하기
+			for (let i in radio) {
+				radio[i].onclick = function() {
+					ctx.clearRect(0, 0, 640, 400);
+					ctx.strokeStyle = radio[i].value;
+					ctx.strokeRect(80, 150, 200, 100);
+					ctx.fillStyle = radio[i].value;
+					ctx.fillRect(360, 150, 200, 100);
+				}
 			}
 		}
 	</script>
