@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!--
+게시물제목
+게시물내용
+게시물작성자
+3개 입력받고 '객체로 생성' 버튼 클릭하면 
+자바스크립트 class Board 타입 객체 생성하고
+조회수 1 증가시킨다
+그 결과를 id="output" 태그에 출력한다
+-->
+	<form>
+		제목: <input type="text" id="title"><br>
+		내용:<br><textarea cols="30" rows="5" id="contents"></textarea><br>
+		작성자: <input type="text" id="writer"><br>
+		<input type="button" id="create" value="객체로 생성">
+		<input type="button" id="view" value="조회"><br>
+	</form>
+	<div id="output"></div>
+	<script>
+	var board;
+	
+	class Board {
+		constructor(title, contents, writer) {
+			this.title = title;
+			this.contents = contents;
+			this.writer = writer;
+			this.time = new Date().toLocaleString();
+			this.viewcount = 0;
+		}
+		
+		toString() {
+			return this.title + " - " + this.contents + " - " + this.writer + " - " + this.time + " - " + this.viewcount;
+		}
+		
+		read() {
+			this.viewcount += 1;
+		}
+	}
+	
+	document.getElementById("create").onclick = function() {
+		var title = document.getElementById("title");
+		var contents = document.getElementById("contents");
+		var writer = document.getElementById("writer");
+		
+		board = new Board(title.value, contents.value, writer.value);
+		board.read();
+		document.getElementById("output").innerHTML += board + "<br>";
+	}
+	
+	document.getElementById("view").onclick = function() {
+		board.read();
+		document.getElementById("output").innerHTML += board + "<br>";
+	}
+</script>
+</body>
+</html>
