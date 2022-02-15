@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script>
+	// 모두를 체크하면 다른 체크박스 모두 체크
+	// 모두를 체크 해제하면 다른 체크박스 모두 체크 해제
+	$(document).ready(function() {
+		$("#all").click(function() {
+			if ($("#all").prop("checked")) {
+				$("#title").prop("checked", true);
+				$("#contents").prop("checked", true);
+				$("#author").prop("checked", true);
+			} else {
+				$("#title").prop("checked", false);
+				$("#contents").prop("checked", false);
+				$("#author").prop("checked", false);
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<h1>검색 대상과 검색어를 입력하세요.</h1>
+	<form action="" id="searchform">
+		<input type=checkbox value="모두" id="all">모두 <input type=checkbox value="제목" id="title">제목 <input type=checkbox value="내용"
+			id="contents">내용 <input type=checkbox value="작성자" id="author">작성자 <input type=text placeholder="검색어를 입력하세요" id="search"> <input
+			type=submit value="검색" id="">
+	</form>
+</body>
+</html>
