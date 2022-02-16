@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("#close").click(function() {
+			window.close();
+		});
+		
+		var idList = [ "java", "html", "script", "jsp", "servlet" ];
+		var inputId = $(opener.document).find("#id").val();
+		var found = false;
+		for (var i = 0; i <= idList.length; i++) {
+			if (idList[i] == inputId) {
+				found = true;
+				break;
+			}
+		}
+
+		var result = inputId;
+		if (found) {
+			result += "는 사용 불가능합니다.";
+		} else {
+			result += "는 사용 가능합니다.";
+		}
+		$("#result").text(result);
+		$(opener.document).find("#result").text(result);
+	});
+</script>
+</head>
+<body>
+	<div id="result"></div>
+	<input type="button" id="close" value="창 닫기">
+</body>
+</html>
