@@ -11,7 +11,7 @@
 		});
 		
 		var idList = [ "java", "html", "script", "jsp", "servlet" ];
-		var inputId = $(opener.document).find("#id").val();
+		var inputId = opener.$("#id").val();
 		var found = false;
 		for (var i = 0; i <= idList.length; i++) {
 			if (idList[i] == inputId) {
@@ -27,7 +27,7 @@
 			result += "는 사용 가능합니다.";
 		}
 		$("#result").text(result);
-		$(opener.document).find("#result").text(result);
+		opener.$("#result").text(result);
 	});
 </script>
 </head>
