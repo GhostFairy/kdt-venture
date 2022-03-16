@@ -35,13 +35,13 @@ public class MemberMain {
 		// System.out.println(service.updateMember(dto) + "개의 행 수정 완료");
 		// System.out.println(service.deleteMember(dto) + "개의 행 삭제 완료");
 
-		// MemberDTO oneDto = dao.selectMember("mybatis");
+		// MemberDTO oneDto = service.selectMember("mybatis");
 		// System.out.println(oneDto.getId() + " : " + oneDto.getName() + " : " +
 		// oneDto.getAddress());
 
-		// List<MemberDTO> list = dao.memberList();
-		// List<MemberDTO> list = dao.pagingList(5, 6);
-		List<MemberDTO> list = dao.addressSearch(new String[] { "서울", "제주" });
+		// List<MemberDTO> list = service.memberList();
+		// List<MemberDTO> list = service.pagingList(5, 6);
+		List<MemberDTO> list = service.addressSearch(new String[] { "서울", "제주" });
 		for (MemberDTO d : list) {
 			System.out.println(d.getId() + " : " + d.getName() + " : " + d.getAddress());
 		}
