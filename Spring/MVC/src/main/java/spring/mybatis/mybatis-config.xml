@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- MyBatis 설정 파일 -->
+<configuration>
+	<!-- SQL 실행 결과를 연동할 DTO의 별명(약어) 설정 -->
+	<typeAliases>
+		<typeAlias type="spring.mybatis.MemberDTO" alias="memberdto" />
+	</typeAliases>
+</configuration>

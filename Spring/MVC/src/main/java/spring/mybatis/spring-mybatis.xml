@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 1. DB 설정 / DataSource(Connection Pool) 사용 설정 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/employeesdb" />
+		<property name="username" value="emp" />
+		<property name="password" value="emp" />
+	</bean>
+
+
+	<!-- 2. SqlSessionFactory 객체에 MyBatis 설정 파일 및 SQL 명령이 정의된 파일 설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:spring/mybatis/mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath:spring/mybatis/sql-mapping.xml" />
+	</bean>
+
+
+	<!-- 3. 설정한 SqlSessionFactory를 통해 SqlSession 객체를 생성하도록 설정 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+
+
+	<!-- 4. 어노테이션을 스캔하여 자동으로 bean으로 생성하도록 설정 -->
+	<context:component-scan base-package="spring.mybatis" />
+</beans>
