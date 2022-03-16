@@ -14,7 +14,7 @@
 		<property name="address" value="서울" />
 	</bean>
 	
-	<!-- bean이 xml에 기록되어있지않아 한 눈에 알아보기 힘들다는 단점이 이씀 -->
+	<!-- bean이 xml에 기록되어있지않아 한 눈에 알아보기 힘들다는 단점이 있음 -->
 	<context:component-scan base-package="annotation.memberservice" />
 
 </beans>
