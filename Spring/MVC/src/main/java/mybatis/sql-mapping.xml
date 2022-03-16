@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- SQL 명령 정의 파일 -->
+<mapper namespace="member">
+	<select id="memberlist" resultType="memberdto">
+		SELECT * FROM member_table
+	</select>
+	<insert id="insertmember" parameterType="memberdto">
+		<!-- $(): jQuery / ${}: EL / #{}: MyBatis -->
+		<!-- mybatis.MemberDTO.getId() = memberdto.getId() = id로 생략 가능 -->
+		INSERT INTO member_table VALUES(#{id}, #{password}, #{name}, #{phone}, #{email}, #{address})
+	</insert>
+	<update id="updatemember" parameterType="memberdto">
+		UPDATE member_table SET name=#{name}, address=#{address} WHERE id=#{id}
+	</update>
+	<!-- 매개변수가 객체가 아닌 단일 변수일 경우 변수 이름은 아무거나 입력해도 상관 없음 -->
+	<delete id="deletemember" parameterType="String">
+		DELETE FROM member_table WHERE id=#{i}
+	</delete>
+	<select id="member" resultType="memberdto" parameterType="String">
+		SELECT * FROM member_table where id=#{i}
+	</select>
+	<!-- foreach 문이 존재하면 매개변수가 배열임을 의미하므로 parameterType="int[]" 생략 가능 -->
+	<select id="paginglist" resultType="memberdto">
+		SELECT * FROM member_table LIMIT
+		<foreach collection="array" item="num" separator=", ">
+			#{num}
+		</foreach>
+	</select>
+	<!-- String[]은 대문자로 시작하기 때문에 String 배열이 아닌 "String[]"라는 클래스로 인식됨 = 생략한다 -->
+	<select id="addresssearch" resultType="memberdto">
+		SELECT * FROM member_table WHERE address IN
+		<foreach collection="array" item="addr" open="(" separator=", " close=")">
+			#{addr}
+		</foreach>
+	</select> 
+</mapper>
