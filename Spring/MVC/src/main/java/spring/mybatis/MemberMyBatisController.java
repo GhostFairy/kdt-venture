@@ -15,6 +15,11 @@ public class MemberMyBatisController {
 	@Autowired
 	MemberService service;
 
+	@RequestMapping("/membermybatisstart")
+	public String memberStart() {
+		return "MyBatis/memberstart";
+	}
+
 	@RequestMapping("/membermybatislist")
 	public ModelAndView memberList() {
 		List<MemberDTO> list = service.memberList();
