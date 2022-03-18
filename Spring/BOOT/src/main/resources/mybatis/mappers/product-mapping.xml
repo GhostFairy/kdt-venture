@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- SQL 명령 정의 파일 -->
+<mapper namespace="product.ProductDAO">
+	<select id="productList" resultType="ProductDTO">
+		SELECT * FROM product
+	</select>
+	<select id="selectProduct" resultType="ProductDTO" parameterType="int">
+		SELECT * FROM product WHERE productCode=#{code}
+	</select>
+</mapper>
