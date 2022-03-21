@@ -1,6 +1,8 @@
 package product;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ProductDTO {
 
@@ -14,7 +16,7 @@ public class ProductDTO {
 
 	int balance;
 
-	Date regdate;
+	String regdate;
 
 	public int getProductCode() {
 		return productCode;
@@ -56,12 +58,12 @@ public class ProductDTO {
 		this.balance = balance;
 	}
 
-	public Date getRegdate() {
+	public String getRegdate() {
 		return regdate;
 	}
 
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public void setRegdate(Timestamp regdate) {
+		this.regdate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(regdate.getTime()));
 	}
 
 }
