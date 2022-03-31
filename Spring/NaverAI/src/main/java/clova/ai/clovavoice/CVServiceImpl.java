@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -13,7 +12,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
 import org.springframework.stereotype.Service;
 
@@ -21,18 +19,14 @@ import org.springframework.stereotype.Service;
 public class CVServiceImpl implements CVService {
 
 	@Override
-	public String tts(String speaker, String textfile) {
-		String path = "C:/ai_images/";
+	public String tts(String speaker, String text) {
 		String tempname = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 		String clientId = "";// 애플리케이션 클라이언트 아이디값";
 		String clientSecret = "";// 애플리케이션 클라이언트 시크릿값";
+		if (speaker == null) {
+			speaker = "napple";
+		}
 		try {
-			String text = "";
-			Scanner sc = new Scanner(new FileReader(path + textfile));
-			while (sc.hasNextLine()) {
-				text += sc.nextLine();
-			}
-			sc.close();
 			text = URLEncoder.encode(text, "UTF-8"); // 13자
 			String apiURL = "https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts";
 			URL url = new URL(apiURL);
@@ -54,7 +48,7 @@ public class CVServiceImpl implements CVService {
 				int read = 0;
 				byte[] bytes = new byte[1024];
 				// 랜덤한 이름으로 mp3 파일 생성
-				File f = new File(path + tempname + ".mp3");
+				File f = new File("C:/ai_images/" + tempname + ".mp3");
 				f.createNewFile();
 				OutputStream outputStream = new FileOutputStream(f);
 				while ((read = is.read(bytes)) != -1) {
